@@ -12,8 +12,8 @@ class MainActivity : AppCompatActivity() {
     }
     private var jogadorDeCima: Thread? = null
     private lateinit var binding: ActivityMainBinding
-    private var tempoJogadorDeCima = 10
-    private var tempoJogadorDeBaixo = 10
+    private var tempoJogadorDeCima = 10.0
+    private var tempoJogadorDeBaixo = 10.0
     private var esgotouOTempo = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.hide()
         window.navigationBarColor = Color.BLACK
         binding = ActivityMainBinding.inflate(layoutInflater)
-        binding.tempoInferior.text = tempoJogadorDeBaixo.toString()
-        binding.tempoSuperior.text = tempoJogadorDeCima.toString()
+        binding.tempoInferior.text = String.format("%.2f",tempoJogadorDeBaixo)
+        binding.tempoSuperior.text = String.format("%.2f",tempoJogadorDeCima)
         setContentView(binding.root)
         jogadorDeBaixo?.start()
         jogadorDeBaixoClica()
@@ -30,8 +30,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun jogadorDeCimaClica() {
+
         binding.jogadorSuperior.setOnClickListener {
             jogadorDeCima?.interrupt()
+            runOnUiThread {
+                binding.jogadorSuperior.isEnabled = false
+                binding.jogadorInferior.isEnabled = true
+            }
             jogadorDeBaixo = Thread {
                 decairTempoJogadorDeBaixo()
             }
@@ -40,10 +45,13 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     private fun jogadorDeBaixoClica() {
         binding.jogadorInferior.setOnClickListener {
             jogadorDeBaixo?.interrupt()
+            runOnUiThread {
+                binding.jogadorSuperior.isEnabled = true
+                binding.jogadorInferior.isEnabled = false
+            }
             jogadorDeCima = Thread {
                 decairTempoJogadorDeCima()
             }
@@ -54,39 +62,44 @@ class MainActivity : AppCompatActivity() {
     private fun decairTempoJogadorDeBaixo() {
         try {
             while (!esgotouOTempo) {
-                Thread.sleep(1000)
-                tempoJogadorDeBaixo--
+                Thread.sleep(1)
+                tempoJogadorDeBaixo -= 0.001
                 runOnUiThread {
-                    binding.tempoInferior.text = tempoJogadorDeBaixo.toString()
+                    binding.tempoInferior.text = String.format("%.2f",tempoJogadorDeBaixo)
                 }
-                if (tempoJogadorDeBaixo == 0) {
+                if (tempoJogadorDeBaixo <= 0.01) {
                     esgotouOTempo = true
-                    runOnUiThread(){
+                    runOnUiThread {
+                        binding.tempoInferior.text = "0"
                         quemGanhouNoTempo("Pretas")
                     }
                 }
             }
-        } catch (ignored: InterruptedException) {}
+        } catch (ignored: InterruptedException) {
+        }
     }
 
     private fun decairTempoJogadorDeCima() {
         try {
             while (!esgotouOTempo) {
-                Thread.sleep(1000)
-                tempoJogadorDeCima--
+                Thread.sleep(1)
+                tempoJogadorDeCima -= 0.001
                 runOnUiThread {
-                    binding.tempoSuperior.text = tempoJogadorDeCima.toString()
+                    binding.tempoSuperior.text = String.format("%.2f",tempoJogadorDeCima)
                 }
-                if (tempoJogadorDeCima == 0) {
+                if (tempoJogadorDeCima <= 0.01) {
                     esgotouOTempo = true
                     runOnUiThread {
+                        binding.tempoSuperior.text = "0"
                         quemGanhouNoTempo("Brancas")
                     }
                 }
             }
-        } catch (ignored: InterruptedException) {}
+        } catch (ignored: InterruptedException) {
+        }
     }
-    private fun quemGanhouNoTempo(quemGanhou:String){
+
+    private fun quemGanhouNoTempo(quemGanhou: String) {
         val alert = AlertDialog.Builder(this)
         alert.setMessage("Jogador de $quemGanhou foi campeão por tempo")
         alert.setTitle(getString(R.string.tempos_um_campe_o))
