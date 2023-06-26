@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RelogioXadrez</string>
+    <string name="app_name">Relógio Xadrez</string>
     <string name="time">00M:00S:00MS</string>
     <string name="iniciar">Iniciar</string>
     <string name="tempos_um_campe_o">Tempos um campeão</string>
