@@ -8,26 +8,26 @@
     >
 
     <EditText
-        android:id="@+id/editTextNumberSigned2"
+        android:id="@+id/seg"
         android:layout_width="60sp"
         android:layout_height="60sp"
         android:ems="2"
-        android:hint="@string/mm"
+        android:hint="@string/seg"
         android:importantForAutofill="no"
         android:inputType="numberSigned"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextNumberSigned"
+        app:layout_constraintBottom_toBottomOf="@+id/min"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/editTextNumberSigned"
-        app:layout_constraintTop_toTopOf="@+id/editTextNumberSigned"
+        app:layout_constraintStart_toEndOf="@+id/min"
+        app:layout_constraintTop_toTopOf="@+id/min"
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/editTextNumberSigned"
+        android:id="@+id/min"
         android:layout_width="60sp"
         android:layout_height="60sp"
-        android:hint="@string/hh"
+        android:hint="@string/min"
         android:importantForAutofill="no"
         android:inputType="numberSigned"
         android:textAlignment="center"
@@ -47,10 +47,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.172"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.152" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.042" />
 
     <TextView
         android:id="@+id/textView2"
@@ -62,34 +61,47 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextNumberSigned"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberSigned"
+        app:layout_constraintStart_toStartOf="@+id/min"
+        app:layout_constraintTop_toBottomOf="@+id/min"
         app:layout_constraintVertical_bias="0.055"
 
         />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/spinner"
         android:layout_width="150sp"
         android:layout_height="48sp"
         android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/editTextNumberSigned2"
+        app:layout_constraintEnd_toEndOf="@+id/seg"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:layout_constraintVertical_bias="0.066" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/init"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/iniciar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/spinner2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/spinner2"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2"
-        app:layout_constraintVertical_bias="0.081" />
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        app:layout_constraintVertical_bias="0.202" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.081"
+        app:srcCompat="@drawable/chess"
+        android:contentDescription="@string/logo_rel_gio_chess" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

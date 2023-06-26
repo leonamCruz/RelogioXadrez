@@ -12,13 +12,15 @@ class MainActivity : AppCompatActivity() {
     }
     private var jogadorDeCima: Thread? = null
     private lateinit var binding: ActivityMainBinding
-    private var tempoJogadorDeCima = 360.0
-    private var tempoJogadorDeBaixo = 360.0
+    private var tempoJogadorDeBaixo: Double = 0.0
+    private var tempoJogadorDeCima: Double = 0.0
     private var esgotouOTempo = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar!!.hide()
+        tempoJogadorDeBaixo = intent.extras!!.getInt("seg").toDouble()
+        tempoJogadorDeCima = intent.extras!!.getInt("seg").toDouble()
         window.navigationBarColor = Color.BLACK
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -87,7 +89,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        } catch (ignored: InterruptedException) {}
+        } catch (ignored: InterruptedException) {
+        }
     }
 
     private fun decairTempoJogadorDeCima() {
@@ -106,7 +109,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        } catch (ignored: InterruptedException) {}
+        } catch (ignored: InterruptedException) {
+        }
     }
 
     private fun converterPadraoDeTempoParaView(isDeCima: Boolean, tempoEmSegundos: Double) {
