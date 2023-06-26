@@ -9,9 +9,12 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/jogadorSuperior"
+        app:cardBackgroundColor="@color/rosinha"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="8dp"
+        android:layout_marginTop="8sp"
+        android:layout_marginHorizontal="8sp"
+        android:layout_marginBottom="50sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,15 +29,19 @@
             android:layout_gravity="center"
             android:rotation="135"
             android:text="@string/time"
+            android:textColor="@color/white"
             android:textSize="35sp"
             android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        app:cardBackgroundColor="@color/azulEscuro"
         android:id="@+id/jogadorInferior"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="8dp"
+        android:layout_marginBottom="8sp"
+        android:layout_marginHorizontal="8sp"
+        android:layout_marginTop="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/time"
+            android:textColor="@color/white"
             android:textSize="35sp"
             android:textStyle="bold"
             android:rotation="35"
@@ -59,5 +67,34 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
+
+    <ImageButton
+        android:id="@+id/restart"
+        android:layout_width="65sp"
+        android:layout_height="65sp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/jogadorInferior"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.318"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/jogadorSuperior"
+        app:layout_constraintVertical_bias="0.499"
+        app:srcCompat="@android:drawable/ic_menu_revert"
+        android:contentDescription="@string/restart"
+        app:tint = "@color/white" />
+
+    <ImageButton
+        android:id="@+id/startM"
+        android:layout_width="65sp"
+        android:layout_height="65sp"
+        android:background="@color/black"
+        android:contentDescription="@string/init"
+        app:layout_constraintBottom_toBottomOf="@+id/restart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.345"
+        app:layout_constraintStart_toEndOf="@+id/restart"
+        app:layout_constraintTop_toTopOf="@+id/restart"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@android:drawable/ic_media_play" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

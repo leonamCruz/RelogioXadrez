@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">RelogioXadrez</string>
-    <string name="time">00H00M:00S</string>
+    <string name="time">00M:00S:00MS</string>
     <string name="iniciar">Iniciar</string>
     <string name="tempos_um_campe_o">Tempos um campeão</string>
+    <string name="mm">MM</string>
+    <string name="hh">HH</string>
+    <string name="quantidade_de_tempo">Quantidade de Tempo</string>
+    <string name="preset">Preset</string>
+    <string name="init">Init</string>
+    <string name="restart">Restart</string>
 </resources>

@@ -12,8 +12,8 @@ class MainActivity : AppCompatActivity() {
     }
     private var jogadorDeCima: Thread? = null
     private lateinit var binding: ActivityMainBinding
-    private var tempoJogadorDeCima = 10.0
-    private var tempoJogadorDeBaixo = 10.0
+    private var tempoJogadorDeCima = 360.0
+    private var tempoJogadorDeBaixo = 360.0
     private var esgotouOTempo = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,16 +21,29 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.hide()
         window.navigationBarColor = Color.BLACK
         binding = ActivityMainBinding.inflate(layoutInflater)
-        binding.tempoInferior.text = String.format("%.2f",tempoJogadorDeBaixo)
-        binding.tempoSuperior.text = String.format("%.2f",tempoJogadorDeCima)
         setContentView(binding.root)
-        jogadorDeBaixo?.start()
-        jogadorDeBaixoClica()
-        jogadorDeCimaClica()
+        converterPadraoDeTempoParaView(true, tempoJogadorDeBaixo)
+        converterPadraoDeTempoParaView(false, tempoJogadorDeCima)
+        clicaNoStart()
+        clicaNoRestart()
+    }
+
+    private fun clicaNoRestart() {
+        binding.restart.setOnClickListener {
+            recreate()
+        }
+    }
+
+    private fun clicaNoStart() {
+        binding.startM.setOnClickListener {
+            jogadorDeBaixo?.start()
+            jogadorDeBaixoClica()
+            jogadorDeCimaClica()
+            binding.startM.isEnabled = false
+        }
     }
 
     private fun jogadorDeCimaClica() {
-
         binding.jogadorSuperior.setOnClickListener {
             jogadorDeCima?.interrupt()
             runOnUiThread {
@@ -43,7 +56,6 @@ class MainActivity : AppCompatActivity() {
             jogadorDeBaixo?.start()
         }
     }
-
 
     private fun jogadorDeBaixoClica() {
         binding.jogadorInferior.setOnClickListener {
@@ -65,9 +77,9 @@ class MainActivity : AppCompatActivity() {
                 Thread.sleep(1)
                 tempoJogadorDeBaixo -= 0.001
                 runOnUiThread {
-                    binding.tempoInferior.text = String.format("%.2f",tempoJogadorDeBaixo)
+                    converterPadraoDeTempoParaView(false, tempoJogadorDeBaixo)
                 }
-                if (tempoJogadorDeBaixo <= 0.01) {
+                if (tempoJogadorDeBaixo <= 0.001) {
                     esgotouOTempo = true
                     runOnUiThread {
                         binding.tempoInferior.text = "0"
@@ -75,8 +87,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        } catch (ignored: InterruptedException) {
-        }
+        } catch (ignored: InterruptedException) {}
     }
 
     private fun decairTempoJogadorDeCima() {
@@ -85,9 +96,9 @@ class MainActivity : AppCompatActivity() {
                 Thread.sleep(1)
                 tempoJogadorDeCima -= 0.001
                 runOnUiThread {
-                    binding.tempoSuperior.text = String.format("%.2f",tempoJogadorDeCima)
+                    converterPadraoDeTempoParaView(true, tempoJogadorDeCima)
                 }
-                if (tempoJogadorDeCima <= 0.01) {
+                if (tempoJogadorDeCima <= 0.001) {
                     esgotouOTempo = true
                     runOnUiThread {
                         binding.tempoSuperior.text = "0"
@@ -95,7 +106,18 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        } catch (ignored: InterruptedException) {
+        } catch (ignored: InterruptedException) {}
+    }
+
+    private fun converterPadraoDeTempoParaView(isDeCima: Boolean, tempoEmSegundos: Double) {
+        runOnUiThread {
+            val minutos = (tempoEmSegundos / 60).toInt()
+            val segundos = (tempoEmSegundos % 60).toInt()
+            val milesimos = ((tempoEmSegundos - (tempoEmSegundos.toInt())) * 100).toInt()
+            val tempoConvertido = String.format("%02d:%02d:%02d", minutos, segundos, milesimos)
+
+            if (isDeCima) binding.tempoSuperior.text =
+                tempoConvertido else binding.tempoInferior.text = tempoConvertido
         }
     }
 
