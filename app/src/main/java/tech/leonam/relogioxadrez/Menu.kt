@@ -3,6 +3,8 @@ package tech.leonam.relogioxadrez
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import tech.leonam.relogioxadrez.databinding.ActivityMenuBinding
@@ -16,7 +18,34 @@ class Menu : AppCompatActivity() {
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         povoarSpinner()
+        setarPadraoSeExistir()
         clickInit()
+    }
+
+    private fun setarPadraoSeExistir() {
+        binding.spinnerPreset.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val seg = binding.spinnerPreset.selectedItem.toString()
+
+                val regex = """(\d{2})\|(\d{2})""".toRegex()
+                val matchResults = regex.findAll(seg)
+
+                matchResults.forEach {
+                    val (minutos, adicional) = it.destructured
+                    binding.min.setText(minutos)
+                    binding.editTextSegundos.setText(adicional)
+                }
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+        }
     }
 
     private fun povoarSpinner() {
@@ -51,8 +80,11 @@ class Menu : AppCompatActivity() {
 
             val minutos = binding.min.text.toString().toInt() * 60
             val segundos = binding.seg.text.toString().toInt() + minutos
+
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("seg", segundos)
+            intent.putExtra("adicional", adicional)
+
             startActivity(intent)
         }
     }

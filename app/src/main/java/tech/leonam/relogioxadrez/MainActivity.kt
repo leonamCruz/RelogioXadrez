@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     private var tempoJogadorDeBaixo: Double = 0.0
     private var tempoJogadorDeCima: Double = 0.0
     private var esgotouOTempo = false
+    private var adicional: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +23,8 @@ class MainActivity : AppCompatActivity() {
 
         tempoJogadorDeBaixo = intent.extras!!.getInt("seg").toDouble()
         tempoJogadorDeCima = intent.extras!!.getInt("seg").toDouble()
+        adicional = intent.extras!!.getDouble("adicional")
+
         window.navigationBarColor = Color.BLACK
 
         binding = ActivityMainBinding.inflate(layoutInflater)
