@@ -22,9 +22,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar!!.hide()
 
+        adicional = intent.extras!!.getInt("ad").toDouble()
         tempoJogadorDeBaixo = intent.extras!!.getInt("seg").toDouble()
         tempoJogadorDeCima = intent.extras!!.getInt("seg").toDouble()
-        adicional = intent.extras!!.getInt("ad").toDouble()
         Toast.makeText(this, adicional.toString(),Toast.LENGTH_SHORT).show()
         window.navigationBarColor = Color.BLACK
 

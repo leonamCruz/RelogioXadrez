@@ -83,7 +83,7 @@ class Menu : AppCompatActivity() {
 
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("seg", segundos)
-            intent.putExtra("ad", adicional)
+            intent.putExtra("ad", adicional.toInt())
 
             startActivity(intent)
         }
