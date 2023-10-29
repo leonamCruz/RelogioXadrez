@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Menu"
-    >
+    tools:context=".Menu">
 
     <EditText
         android:id="@+id/seg"
@@ -17,7 +16,7 @@
         android:inputType="numberSigned"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/min"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="@+id/text_quantidade_tempo"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/min"
         app:layout_constraintTop_toTopOf="@+id/min"
@@ -27,53 +26,88 @@
         android:id="@+id/min"
         android:layout_width="60sp"
         android:layout_height="60sp"
+        android:layout_marginTop="20sp"
         android:hint="@string/min"
         android:importantForAutofill="no"
         android:inputType="numberSigned"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.039" />
+        app:layout_constraintBottom_toTopOf="@id/text_adicional_lances"
+        app:layout_constraintEnd_toStartOf="@+id/seg"
+        app:layout_constraintStart_toStartOf="@+id/text_quantidade_tempo"
+        app:layout_constraintTop_toBottomOf="@+id/text_quantidade_tempo" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/text_quantidade_tempo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
         android:text="@string/quantidade_de_tempo"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/min"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.173" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_preset" />
 
     <Button
         android:id="@+id/init"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
         android:text="@string/iniciar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/min"
-        app:layout_constraintVertical_bias="0.228" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_segundos" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="100sp"
+        android:layout_height="100sp"
+        android:layout_margin="20sp"
+        android:contentDescription="@string/logo_rel_gio_chess"
+        app:layout_constraintBottom_toTopOf="@id/spinner_preset"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.081"
-        app:srcCompat="@drawable/chess"
-        android:contentDescription="@string/logo_rel_gio_chess" />
+        app:layout_constraintVertical_chainStyle="packed"
+        app:srcCompat="@drawable/chess" />
+
+    <Spinner
+        android:id="@+id/spinner_preset"
+        android:layout_width="200sp"
+        android:layout_height="50sp"
+        android:layout_marginTop="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/text_quantidade_tempo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/text_adicional_lances"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:text="@string/adicional_por_lance_em_segundos"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/edit_text_segundos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/min" />
+
+    <EditText
+        android:id="@+id/edit_text_segundos"
+        android:layout_width="wrap_content"
+        android:layout_height="50sp"
+        android:layout_marginTop="20sp"
+        android:hint="@string/_0_segundos"
+        android:importantForAutofill="no"
+        android:inputType="numberSigned"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@id/init"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_adicional_lances" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

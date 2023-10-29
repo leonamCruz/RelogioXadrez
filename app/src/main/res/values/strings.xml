@@ -12,4 +12,6 @@
     <string name="logo_rel_gio_chess">Logo Relógio Chess</string>
     <string name="seg">Seg</string>
     <string name="min">Min</string>
+    <string name="adicional_por_lance_em_segundos">Adicional por lance em segundos</string>
+    <string name="_0_segundos">0 segundos</string>
 </resources>
