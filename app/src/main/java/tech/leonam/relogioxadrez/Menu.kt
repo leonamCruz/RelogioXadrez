@@ -61,7 +61,8 @@ class Menu : AppCompatActivity() {
             "15|10",
             "30|00",
             "30|20",
-            "60|00"
+            "60|00",
+            "120|00"
         )
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinnerArray)
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
@@ -78,12 +79,12 @@ class Menu : AppCompatActivity() {
             if (seg.isBlank()) binding.seg.setText("0")
             if (adicional.isBlank()) binding.editTextSegundos.setText("0")
 
-            val minutos = binding.min.text.toString().toInt() * 60
-            val segundos = binding.seg.text.toString().toInt() + minutos
+            val minutos = binding.min.text.toString().toDouble() * 60.0
+            val segundos = binding.seg.text.toString().toDouble() + minutos
 
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("seg", segundos)
-            intent.putExtra("ad", adicional.toInt())
+            intent.putExtra("ad", adicional.toDouble())
 
             startActivity(intent)
         }

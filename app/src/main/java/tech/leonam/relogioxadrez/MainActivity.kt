@@ -22,9 +22,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar!!.hide()
 
-        adicional = intent.extras!!.getInt("ad").toDouble()
-        tempoJogadorDeBaixo = intent.extras!!.getInt("seg").toDouble()
-        tempoJogadorDeCima = intent.extras!!.getInt("seg").toDouble()
+        adicional = intent.extras!!.getDouble("ad")
+        tempoJogadorDeBaixo = intent.extras!!.getDouble("seg")
+        tempoJogadorDeCima = intent.extras!!.getDouble("seg")
+
         Toast.makeText(this, adicional.toString(),Toast.LENGTH_SHORT).show()
         window.navigationBarColor = Color.BLACK
 
@@ -55,7 +56,6 @@ class MainActivity : AppCompatActivity() {
     private fun jogadorDeCimaClica() {
         binding.jogadorSuperior.setOnClickListener {
             tempoJogadorDeCima += adicional
-            converterPadraoDeTempoParaView(false, tempoJogadorDeCima)
             jogadorDeCima?.interrupt()
             runOnUiThread {
                 binding.jogadorSuperior.isEnabled = false
@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun jogadorDeBaixoClica() {
         binding.jogadorInferior.setOnClickListener {
+            tempoJogadorDeBaixo += adicional
             jogadorDeBaixo?.interrupt()
             runOnUiThread {
                 binding.jogadorSuperior.isEnabled = true
@@ -84,7 +85,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun decairTempoJogadorDeBaixo() {
         try {
-            tempoJogadorDeCima += adicional
             while (!esgotouOTempo) {
                 Thread.sleep(1)
                 tempoJogadorDeBaixo -= 0.001
@@ -105,7 +105,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun decairTempoJogadorDeCima() {
         try {
-            tempoJogadorDeBaixo += adicional
             while (!esgotouOTempo) {
                 Thread.sleep(1)
                 tempoJogadorDeCima -= 0.001
