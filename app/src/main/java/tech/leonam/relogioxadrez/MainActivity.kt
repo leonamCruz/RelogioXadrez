@@ -19,11 +19,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar!!.hide()
+
         tempoJogadorDeBaixo = intent.extras!!.getInt("seg").toDouble()
         tempoJogadorDeCima = intent.extras!!.getInt("seg").toDouble()
         window.navigationBarColor = Color.BLACK
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         converterPadraoDeTempoParaView(true, tempoJogadorDeBaixo)
         converterPadraoDeTempoParaView(false, tempoJogadorDeCima)
         clicaNoStart()
@@ -89,8 +92,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        } catch (ignored: InterruptedException) {
-        }
+        } catch (ignored: InterruptedException) {}
     }
 
     private fun decairTempoJogadorDeCima() {
@@ -131,4 +133,5 @@ class MainActivity : AppCompatActivity() {
         alert.setTitle(getString(R.string.tempos_um_campe_o))
         alert.create().show()
     }
+
 }
