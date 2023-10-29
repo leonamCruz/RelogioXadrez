@@ -72,18 +72,18 @@ class Menu : AppCompatActivity() {
         binding.init.setOnClickListener {
             val min = binding.min.text.toString()
             val seg = binding.seg.text.toString()
-            val adicional = binding.textAdicionalLances.text.toString()
+            val adicional = binding.editTextSegundos.text.toString()
 
             if (min.isBlank()) binding.min.setText("0")
             if (seg.isBlank()) binding.seg.setText("0")
-            if (adicional.isBlank()) binding.textAdicionalLances.text = "0"
+            if (adicional.isBlank()) binding.editTextSegundos.setText("0")
 
             val minutos = binding.min.text.toString().toInt() * 60
             val segundos = binding.seg.text.toString().toInt() + minutos
 
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("seg", segundos)
-            intent.putExtra("adicional", adicional)
+            intent.putExtra("ad", adicional)
 
             startActivity(intent)
         }

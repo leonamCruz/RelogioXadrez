@@ -2,6 +2,7 @@ package tech.leonam.relogioxadrez
 
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import tech.leonam.relogioxadrez.databinding.ActivityMainBinding
@@ -23,8 +24,8 @@ class MainActivity : AppCompatActivity() {
 
         tempoJogadorDeBaixo = intent.extras!!.getInt("seg").toDouble()
         tempoJogadorDeCima = intent.extras!!.getInt("seg").toDouble()
-        adicional = intent.extras!!.getDouble("adicional")
-
+        adicional = intent.extras!!.getInt("ad").toDouble()
+        Toast.makeText(this, adicional.toString(),Toast.LENGTH_SHORT).show()
         window.navigationBarColor = Color.BLACK
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -53,6 +54,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun jogadorDeCimaClica() {
         binding.jogadorSuperior.setOnClickListener {
+            tempoJogadorDeCima += adicional
+            converterPadraoDeTempoParaView(false, tempoJogadorDeCima)
             jogadorDeCima?.interrupt()
             runOnUiThread {
                 binding.jogadorSuperior.isEnabled = false
@@ -81,6 +84,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun decairTempoJogadorDeBaixo() {
         try {
+            tempoJogadorDeCima += adicional
             while (!esgotouOTempo) {
                 Thread.sleep(1)
                 tempoJogadorDeBaixo -= 0.001
@@ -95,11 +99,13 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        } catch (ignored: InterruptedException) {}
+        } catch (ignored: InterruptedException) {
+        }
     }
 
     private fun decairTempoJogadorDeCima() {
         try {
+            tempoJogadorDeBaixo += adicional
             while (!esgotouOTempo) {
                 Thread.sleep(1)
                 tempoJogadorDeCima -= 0.001
