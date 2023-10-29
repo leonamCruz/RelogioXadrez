@@ -1,5 +1,6 @@
 package tech.leonam.relogioxadrez
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
@@ -139,6 +140,12 @@ class MainActivity : AppCompatActivity() {
         val alert = AlertDialog.Builder(this)
         alert.setMessage("Jogador de $quemGanhou foi campeão por tempo")
         alert.setTitle(getString(R.string.tempos_um_campe_o))
+        alert.setPositiveButton("Ok") { _, _ ->
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+
+        }
         alert.create().show()
     }
 
