@@ -61,8 +61,7 @@ class Menu : AppCompatActivity() {
             "15|10",
             "30|00",
             "30|20",
-            "60|00",
-            "120|00"
+            "60|00"
         )
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinnerArray)
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
