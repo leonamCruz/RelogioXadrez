@@ -20,7 +20,8 @@ class MainActivity : AppCompatActivity() {
     private var melhorDe: Int = 1
     private var movCima: Int = 0
     private var movBaixo: Int = 0
-
+    private var pontosDeCima = 0
+    private var pontosDeBaixo = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar!!.hide()
@@ -42,6 +43,20 @@ class MainActivity : AppCompatActivity() {
         converterPadraoDeTempoParaView(false, tempoJogadorDeCima)
         clicaNoStart()
         clicaNoRestart()
+        abandonarPartida()
+    }
+
+    private fun abandonarPartida() {
+        binding.jogadorInferior.setOnLongClickListener{
+            jogadorDeCima?.interrupt()
+            jogadorDeBaixo?.interrupt()
+            quemAbandonou("Rosa")
+            true
+        }
+        binding.jogadorSuperior.setOnLongClickListener{
+            quemAbandonou("Azul")
+            true
+        }
     }
 
     private fun clicaNoRestart() {
@@ -153,6 +168,18 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+
+        }
+        alert.create().show()
+    }
+
+    private fun quemAbandonou (quemAbandonou: String){
+        val alert = AlertDialog.Builder(this)
+        alert.setMessage("Jogador $quemAbandonou abandonou porque não dá mais.")
+        alert.setTitle(getString(R.string.abandono))
+        alert.setPositiveButton("Ok") { _, _ ->
+
+            recreate()
 
         }
         alert.create().show()
