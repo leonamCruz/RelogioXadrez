@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
     private var esgotouOTempo = false
     private var adicional: Double = 0.0
     private var melhorDe: Int = 1
+    private var movCima: Int = 0
+    private var movBaixo: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,9 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.movAzul.text = movCima.toString()
+        binding.movRosa.text = movBaixo.toString()
 
         converterPadraoDeTempoParaView(true, tempoJogadorDeBaixo)
         converterPadraoDeTempoParaView(false, tempoJogadorDeCima)
@@ -57,6 +62,8 @@ class MainActivity : AppCompatActivity() {
     private fun jogadorDeCimaClica() {
         binding.jogadorSuperior.setOnClickListener {
             tempoJogadorDeCima += adicional
+            movCima++
+            binding.movAzul.text = movCima.toString()
             jogadorDeCima?.interrupt()
             runOnUiThread {
                 binding.jogadorSuperior.isEnabled = false
@@ -72,6 +79,8 @@ class MainActivity : AppCompatActivity() {
     private fun jogadorDeBaixoClica() {
         binding.jogadorInferior.setOnClickListener {
             tempoJogadorDeBaixo += adicional
+            movBaixo++
+            binding.movRosa.text = movBaixo.toString()
             jogadorDeBaixo?.interrupt()
             runOnUiThread {
                 binding.jogadorSuperior.isEnabled = true
@@ -96,7 +105,7 @@ class MainActivity : AppCompatActivity() {
                     esgotouOTempo = true
                     runOnUiThread {
                         binding.tempoInferior.text = "0"
-                        quemGanhouNoTempo("Pretas")
+                        quemGanhouNoTempo("Azul")
                     }
                 }
             }
@@ -116,7 +125,7 @@ class MainActivity : AppCompatActivity() {
                     esgotouOTempo = true
                     runOnUiThread {
                         binding.tempoSuperior.text = "0"
-                        quemGanhouNoTempo("Brancas")
+                        quemGanhouNoTempo("Rosa")
                     }
                 }
             }
