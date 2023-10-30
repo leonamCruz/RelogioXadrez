@@ -27,8 +27,6 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.hide()
 
         adicional = intent.extras!!.getDouble("ad")
-        tempoJogadorDeBaixo = intent.extras!!.getDouble("seg")
-        tempoJogadorDeCima = intent.extras!!.getDouble("seg")
         melhorDe = intent.extras!!.getInt("melhor")
 
         window.navigationBarColor = Color.BLACK
@@ -36,11 +34,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.movAzul.text = movCima.toString()
-        binding.movRosa.text = movBaixo.toString()
+        zeraMantendoPontos()
 
-        converterPadraoDeTempoParaView(true, tempoJogadorDeBaixo)
-        converterPadraoDeTempoParaView(false, tempoJogadorDeCima)
         clicaNoStart()
         clicaNoRestart()
         abandonarPartida()
@@ -50,10 +45,16 @@ class MainActivity : AppCompatActivity() {
         binding.jogadorInferior.setOnLongClickListener{
             jogadorDeCima?.interrupt()
             jogadorDeBaixo?.interrupt()
+            pontosDeCima++
+            print(pontosDeCima)
             quemAbandonou("Rosa")
             true
         }
         binding.jogadorSuperior.setOnLongClickListener{
+            jogadorDeCima?.interrupt()
+            jogadorDeBaixo?.interrupt()
+            pontosDeBaixo++
+            print(pontosDeBaixo)
             quemAbandonou("Azul")
             true
         }
@@ -179,10 +180,22 @@ class MainActivity : AppCompatActivity() {
         alert.setTitle(getString(R.string.abandono))
         alert.setPositiveButton("Ok") { _, _ ->
 
-            recreate()
+            zeraMantendoPontos()
 
+            print("Azul: $pontosDeCima , Rosa: $pontosDeBaixo " )
         }
         alert.create().show()
+    }
+
+    private fun zeraMantendoPontos(){
+        tempoJogadorDeCima = intent.extras!!.getDouble("seg")
+        tempoJogadorDeBaixo = intent.extras!!.getDouble("seg")
+        converterPadraoDeTempoParaView(true, tempoJogadorDeBaixo)
+        converterPadraoDeTempoParaView(false, tempoJogadorDeCima)
+        movCima = 0
+        movBaixo = 0
+        binding.movAzul.text = movCima.toString()
+        binding.movRosa.text = movBaixo.toString()
     }
 
 }
