@@ -117,6 +117,7 @@
         app:layout_constraintStart_toStartOf="@id/text_melhor_de"
         app:layout_constraintEnd_toEndOf="@id/text_melhor_de"
         app:layout_constraintBottom_toTopOf="@id/init"
+        android:textAlignment="center"
         />
 
     <Button
