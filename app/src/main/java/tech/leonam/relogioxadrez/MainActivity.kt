@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private var tempoJogadorDeCima: Double = 0.0
     private var esgotouOTempo = false
     private var adicional: Double = 0.0
+    private var melhorDe: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +27,8 @@ class MainActivity : AppCompatActivity() {
         adicional = intent.extras!!.getDouble("ad")
         tempoJogadorDeBaixo = intent.extras!!.getDouble("seg")
         tempoJogadorDeCima = intent.extras!!.getDouble("seg")
+        melhorDe = intent.extras!!.getInt("melhor")
 
-        Toast.makeText(this, adicional.toString(),Toast.LENGTH_SHORT).show()
         window.navigationBarColor = Color.BLACK
 
         binding = ActivityMainBinding.inflate(layoutInflater)

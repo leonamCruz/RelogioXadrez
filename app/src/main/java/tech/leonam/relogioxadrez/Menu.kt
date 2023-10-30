@@ -17,9 +17,27 @@ class Menu : AppCompatActivity() {
         supportActionBar!!.hide()
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        povoarSpinner()
+        povoarSpinnerPresetTempo()
         setarPadraoSeExistir()
+        povoarSpinnerMelhorDeTanto()
         clickInit()
+    }
+
+    private fun povoarSpinnerMelhorDeTanto() {
+        val spinnerArray = arrayOf(
+            "3",
+            "5",
+            "7",
+            "11",
+            "13",
+            "15",
+            "17",
+            "19",
+            "21"
+        )
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinnerArray)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.melhorDe.adapter = adapter
     }
 
     private fun setarPadraoSeExistir() {
@@ -48,7 +66,7 @@ class Menu : AppCompatActivity() {
         }
     }
 
-    private fun povoarSpinner() {
+    private fun povoarSpinnerPresetTempo() {
         val spinnerArray = arrayOf(
             "01|00",
             "02|01",
@@ -73,6 +91,7 @@ class Menu : AppCompatActivity() {
             val min = binding.min.text.toString()
             val seg = binding.seg.text.toString()
             val adicional = binding.editTextSegundos.text.toString()
+            val melhorDe = binding.melhorDe.selectedItem.toString().toInt()
 
             if (min.isBlank()) binding.min.setText("0")
             if (seg.isBlank()) binding.seg.setText("0")
@@ -84,6 +103,7 @@ class Menu : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("seg", segundos)
             intent.putExtra("ad", adicional.toDouble())
+            intent.putExtra("melhor", melhorDe)
 
             startActivity(intent)
         }
