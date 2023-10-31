@@ -8,9 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import tech.leonam.relogioxadrez.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private var jogadorDeBaixo: Thread? = Thread {
-        decairTempoJogadorDeBaixo()
-    }
+    private var jogadorDeBaixo: Thread? = null
     private var jogadorDeCima: Thread? = null
     private lateinit var binding: ActivityMainBinding
     private var tempoJogadorDeBaixo: Double = 0.0
@@ -23,15 +21,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar!!.hide()
-
-        adicional = intent.extras!!.getDouble("ad")
-
         window.navigationBarColor = Color.BLACK
-
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        zeraMantendoPontos()
+        zerar()
+
+        jogadorDeBaixo = Thread {
+            decairTempoJogadorDeBaixo()
+        }
+        binding.jogadorInferior.isEnabled = false
+        binding.jogadorSuperior.isEnabled = false
 
         clicaNoStart()
 
@@ -40,6 +39,8 @@ class MainActivity : AppCompatActivity() {
 
         clicaNoRestart()
         abandonarPartida()
+
+        setContentView(binding.root)
     }
 
     private fun abandonarPartida() {
@@ -66,6 +67,7 @@ class MainActivity : AppCompatActivity() {
     private fun clicaNoStart() {
         binding.startM.setOnClickListener {
             jogadorDeBaixo?.start()
+            binding.jogadorInferior.isEnabled = true
             binding.startM.isEnabled = false
         }
     }
@@ -98,11 +100,9 @@ class MainActivity : AppCompatActivity() {
                 binding.jogadorSuperior.isEnabled = true
                 binding.jogadorInferior.isEnabled = false
             }
-
             jogadorDeCima = Thread {
                 decairTempoJogadorDeCima()
             }
-
             jogadorDeCima?.start()
         }
     }
@@ -192,9 +192,10 @@ class MainActivity : AppCompatActivity() {
         alert.create().show()
     }
 
-    private fun zeraMantendoPontos(){
+    private fun zerar(){
         tempoJogadorDeCima = intent.extras!!.getDouble("seg")
         tempoJogadorDeBaixo = intent.extras!!.getDouble("seg")
+        adicional = intent.extras!!.getDouble("ad")
 
         converterPadraoDeTempoParaView(true, tempoJogadorDeBaixo)
         converterPadraoDeTempoParaView(false, tempoJogadorDeCima)
