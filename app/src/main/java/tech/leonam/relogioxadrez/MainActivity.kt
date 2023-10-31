@@ -34,6 +34,10 @@ class MainActivity : AppCompatActivity() {
         zeraMantendoPontos()
 
         clicaNoStart()
+
+        jogadorDeBaixoClica()
+        jogadorDeCimaClica()
+
         clicaNoRestart()
         abandonarPartida()
     }
@@ -62,8 +66,6 @@ class MainActivity : AppCompatActivity() {
     private fun clicaNoStart() {
         binding.startM.setOnClickListener {
             jogadorDeBaixo?.start()
-            jogadorDeBaixoClica()
-            jogadorDeCimaClica()
             binding.startM.isEnabled = false
         }
     }
@@ -91,13 +93,16 @@ class MainActivity : AppCompatActivity() {
             movBaixo++
             binding.movRosa.text = movBaixo.toString()
             jogadorDeBaixo?.interrupt()
+
             runOnUiThread {
                 binding.jogadorSuperior.isEnabled = true
                 binding.jogadorInferior.isEnabled = false
             }
+
             jogadorDeCima = Thread {
                 decairTempoJogadorDeCima()
             }
+
             jogadorDeCima?.start()
         }
     }
@@ -106,12 +111,16 @@ class MainActivity : AppCompatActivity() {
         try {
             while (!esgotouOTempo) {
                 Thread.sleep(1)
+
                 tempoJogadorDeBaixo -= 0.001
+
                 runOnUiThread {
                     converterPadraoDeTempoParaView(false, tempoJogadorDeBaixo)
                 }
+
                 if (tempoJogadorDeBaixo <= 0.001) {
                     esgotouOTempo = true
+
                     runOnUiThread {
                         binding.tempoInferior.text = "0"
                         quemGanhouNoTempo("Azul")
@@ -126,12 +135,16 @@ class MainActivity : AppCompatActivity() {
         try {
             while (!esgotouOTempo) {
                 Thread.sleep(1)
+
                 tempoJogadorDeCima -= 0.001
+
                 runOnUiThread {
                     converterPadraoDeTempoParaView(true, tempoJogadorDeCima)
                 }
+
                 if (tempoJogadorDeCima <= 0.001) {
                     esgotouOTempo = true
+
                     runOnUiThread {
                         binding.tempoSuperior.text = "0"
                         quemGanhouNoTempo("Rosa")
@@ -182,10 +195,13 @@ class MainActivity : AppCompatActivity() {
     private fun zeraMantendoPontos(){
         tempoJogadorDeCima = intent.extras!!.getDouble("seg")
         tempoJogadorDeBaixo = intent.extras!!.getDouble("seg")
+
         converterPadraoDeTempoParaView(true, tempoJogadorDeBaixo)
         converterPadraoDeTempoParaView(false, tempoJogadorDeCima)
+
         movCima = 0
         movBaixo = 0
+
         binding.movAzul.text = movCima.toString()
         binding.movRosa.text = movBaixo.toString()
     }
