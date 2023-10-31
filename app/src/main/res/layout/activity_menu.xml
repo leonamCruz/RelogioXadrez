@@ -91,45 +91,20 @@
         android:importantForAutofill="no"
         android:inputType="numberSigned"
         android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@id/text_adicional_lances"
-        app:layout_constraintStart_toStartOf="@id/text_adicional_lances"
+        app:layout_constraintBottom_toTopOf="@+id/init"
         app:layout_constraintEnd_toEndOf="@id/text_adicional_lances"
-        app:layout_constraintBottom_toTopOf="@id/text_melhor_de"
-        />
-
-    <TextView
-        android:id="@+id/text_melhor_de"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/melhor_de"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/melhor_de"
-        app:layout_constraintEnd_toEndOf="@id/edit_text_segundos"
-        app:layout_constraintStart_toStartOf="@id/edit_text_segundos"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_segundos" />
-
-    <Spinner
-        android:id="@+id/melhor_de"
-        android:layout_width="200sp"
-        android:layout_height="50sp"
-        app:layout_constraintTop_toBottomOf="@id/text_melhor_de"
-        app:layout_constraintStart_toStartOf="@id/text_melhor_de"
-        app:layout_constraintEnd_toEndOf="@id/text_melhor_de"
-        app:layout_constraintBottom_toTopOf="@id/init"
-        android:textAlignment="center"
-        />
+        app:layout_constraintStart_toStartOf="@id/text_adicional_lances"
+        app:layout_constraintTop_toBottomOf="@id/text_adicional_lances" />
 
     <Button
         android:id="@+id/init"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/iniciar"
-        app:layout_constraintTop_toBottomOf="@id/melhor_de"
-        app:layout_constraintStart_toStartOf="@id/melhor_de"
-        app:layout_constraintEnd_toEndOf="@id/melhor_de"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_segundos"
         app:layout_constraintBottom_toBottomOf="parent"
-/>
+        app:layout_constraintEnd_toEndOf="@+id/edit_text_segundos"
+        app:layout_constraintStart_toStartOf="@+id/edit_text_segundos" />
 
 
 

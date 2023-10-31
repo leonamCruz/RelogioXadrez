@@ -17,17 +17,14 @@ class MainActivity : AppCompatActivity() {
     private var tempoJogadorDeCima: Double = 0.0
     private var esgotouOTempo = false
     private var adicional: Double = 0.0
-    private var melhorDe: Int = 1
     private var movCima: Int = 0
     private var movBaixo: Int = 0
-    private var pontosDeCima = 0
-    private var pontosDeBaixo = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar!!.hide()
 
         adicional = intent.extras!!.getDouble("ad")
-        melhorDe = intent.extras!!.getInt("melhor")
 
         window.navigationBarColor = Color.BLACK
 
@@ -45,16 +42,12 @@ class MainActivity : AppCompatActivity() {
         binding.jogadorInferior.setOnLongClickListener{
             jogadorDeCima?.interrupt()
             jogadorDeBaixo?.interrupt()
-            pontosDeCima++
-            print(pontosDeCima)
             quemAbandonou("Rosa")
             true
         }
         binding.jogadorSuperior.setOnLongClickListener{
             jogadorDeCima?.interrupt()
             jogadorDeBaixo?.interrupt()
-            pontosDeBaixo++
-            print(pontosDeBaixo)
             quemAbandonou("Azul")
             true
         }
@@ -180,9 +173,8 @@ class MainActivity : AppCompatActivity() {
         alert.setTitle(getString(R.string.abandono))
         alert.setPositiveButton("Ok") { _, _ ->
 
-            zeraMantendoPontos()
+           recreate()
 
-            print("Azul: $pontosDeCima , Rosa: $pontosDeBaixo " )
         }
         alert.create().show()
     }
