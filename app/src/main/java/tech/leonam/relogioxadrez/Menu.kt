@@ -15,8 +15,10 @@ class Menu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         window!!.statusBarColor = Color.BLACK
         supportActionBar!!.hide()
+
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         povoarSpinnerPresetTempo()
         setarPadraoSeExistir()
         povoarSpinnerMelhorDeTanto()

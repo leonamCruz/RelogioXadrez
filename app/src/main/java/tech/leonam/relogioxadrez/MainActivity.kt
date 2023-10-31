@@ -78,13 +78,16 @@ class MainActivity : AppCompatActivity() {
             movCima++
             binding.movAzul.text = movCima.toString()
             jogadorDeCima?.interrupt()
+
             runOnUiThread {
                 binding.jogadorSuperior.isEnabled = false
                 binding.jogadorInferior.isEnabled = true
             }
+
             jogadorDeBaixo = Thread {
                 decairTempoJogadorDeBaixo()
             }
+
             jogadorDeBaixo?.start()
         }
     }
@@ -94,15 +97,18 @@ class MainActivity : AppCompatActivity() {
             tempoJogadorDeBaixo += adicional
             movBaixo++
             binding.movRosa.text = movBaixo.toString()
+
             jogadorDeBaixo?.interrupt()
 
             runOnUiThread {
                 binding.jogadorSuperior.isEnabled = true
                 binding.jogadorInferior.isEnabled = false
             }
+
             jogadorDeCima = Thread {
                 decairTempoJogadorDeCima()
             }
+
             jogadorDeCima?.start()
         }
     }
@@ -149,6 +155,7 @@ class MainActivity : AppCompatActivity() {
                         binding.tempoSuperior.text = "0"
                         quemGanhouNoTempo("Rosa")
                     }
+
                 }
             }
         } catch (ignored: InterruptedException) {
