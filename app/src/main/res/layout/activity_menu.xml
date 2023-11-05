@@ -38,25 +38,50 @@
         app:layout_constraintTop_toBottomOf="@id/spinner_preset"
         app:layout_constraintStart_toStartOf="@id/spinner_preset"
         app:layout_constraintEnd_toEndOf="@id/spinner_preset"
-        app:layout_constraintBottom_toTopOf="@+id/min"
+        app:layout_constraintBottom_toTopOf="@+id/minOne"
+        />
+
+    <TextView
+        android:id="@+id/jogadorAzulText"
+        android:text="@string/jogador_azul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/minOne"
+        app:layout_constraintTop_toTopOf="@id/minOne"
+        app:layout_constraintBottom_toBottomOf="@id/minOne"
+        />
+
+    <TextView
+        android:id="@+id/jogadorAzulRosa"
+        android:text="@string/jogador_rosa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/minTwo"
+        app:layout_constraintTop_toTopOf="@id/minTwo"
+        app:layout_constraintBottom_toBottomOf="@id/minTwo"
         />
 
     <EditText
-        android:id="@+id/min"
+        android:id="@+id/minOne"
         android:layout_width="60sp"
         android:layout_height="60sp"
         android:hint="@string/min"
         android:importantForAutofill="no"
         android:inputType="numberSigned"
         android:textAlignment="center"
+
+        app:layout_constraintStart_toEndOf="@id/jogadorAzulText"
+        app:layout_constraintEnd_toStartOf="@id/segOne"
+        app:layout_constraintBottom_toTopOf="@id/minTwo"
         app:layout_constraintTop_toBottomOf="@id/text_quantidade_tempo"
-        app:layout_constraintStart_toStartOf="@id/text_quantidade_tempo"
-        app:layout_constraintEnd_toStartOf="@id/seg"
-        app:layout_constraintBottom_toTopOf="@id/text_adicional_lances"
         />
 
     <EditText
-        android:id="@+id/seg"
+        android:id="@+id/segOne"
         android:layout_width="60sp"
         android:layout_height="60sp"
         android:ems="2"
@@ -64,11 +89,41 @@
         android:importantForAutofill="no"
         android:inputType="numberSigned"
         android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@id/min"
-        app:layout_constraintTop_toTopOf="@id/min"
-        app:layout_constraintEnd_toEndOf="@id/text_quantidade_tempo"
-        app:layout_constraintBottom_toBottomOf="@id/min"
+        app:layout_constraintStart_toEndOf="@id/minOne"
+        app:layout_constraintTop_toBottomOf="@id/text_quantidade_tempo"
+        app:layout_constraintBottom_toTopOf="@id/segTwo"
+        app:layout_constraintEnd_toEndOf="parent"
   />
+
+    <EditText
+        android:id="@+id/minTwo"
+        android:layout_width="60sp"
+        android:layout_height="60sp"
+        android:hint="@string/min"
+        android:importantForAutofill="no"
+        android:inputType="numberSigned"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@id/text_adicional_lances"
+        app:layout_constraintEnd_toStartOf="@id/segTwo"
+        app:layout_constraintStart_toStartOf="@id/minOne"
+        app:layout_constraintTop_toBottomOf="@id/minOne"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        />
+
+    <EditText
+        android:id="@+id/segTwo"
+        android:layout_width="60sp"
+        android:layout_height="60sp"
+        android:ems="2"
+        android:hint="@string/seg"
+        android:importantForAutofill="no"
+        android:inputType="numberSigned"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@id/minTwo"
+        app:layout_constraintEnd_toEndOf="@id/segOne"
+        app:layout_constraintTop_toBottomOf="@id/segOne"
+        app:layout_constraintBottom_toTopOf="@id/text_adicional_lances"
+        />
 
     <TextView
         android:id="@+id/text_adicional_lances"
@@ -77,9 +132,9 @@
         android:text="@string/adicional_por_lance_em_segundos"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/min"
-        app:layout_constraintStart_toStartOf="@id/min"
-        app:layout_constraintEnd_toEndOf="@id/seg"
+        app:layout_constraintTop_toBottomOf="@id/minTwo"
+        app:layout_constraintStart_toStartOf="@id/jogadorAzulRosa"
+        app:layout_constraintEnd_toEndOf="@id/segTwo"
         app:layout_constraintBottom_toTopOf="@id/edit_text_segundos"
         />
 

@@ -17,4 +17,6 @@
     <string name="melhor_de">Melhor de?</string>
     <string name="move">move</string>
     <string name="abandono">Abandono</string>
+    <string name="jogador_azul">Jogador Azul</string>
+    <string name="jogador_rosa">Jogador Rosa</string>
 </resources>
