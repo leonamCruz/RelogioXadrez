@@ -56,7 +56,9 @@ class Menu : AppCompatActivity() {
 
                 matchResults.forEach {
                     val (minutos, adicional) = it.destructured
-                    binding.min.setText(minutos)
+
+                    binding.minOne.setText(minutos)
+                    binding.minTwo.setText(minutos)
                     binding.editTextSegundos.setText(adicional)
                 }
 
@@ -89,20 +91,31 @@ class Menu : AppCompatActivity() {
 
     private fun clickInit() {
         binding.init.setOnClickListener {
-            val min = binding.min.text.toString()
-            val seg = binding.seg.text.toString()
+
+            val minOne = binding.minOne.text.toString()
+            val segOne = binding.segOne.text.toString()
+            val minTwo = binding.minTwo.text.toString()
+            val segTwo = binding.segTwo.text.toString()
+
             val adicional = binding.editTextSegundos.text.toString()
 
-            if (min.isBlank()) binding.min.setText("0")
-            if (seg.isBlank()) binding.seg.setText("0")
+            if (minOne.isBlank()) binding.minOne.setText("0")
+            if (minTwo.isBlank()) binding.minTwo.setText("0")
+            if (segOne.isBlank()) binding.segOne.setText("0")
+            if (segTwo.isBlank()) binding.segTwo.setText("0")
             if (adicional.isBlank()) binding.editTextSegundos.setText("0")
 
-            val minutos = binding.min.text.toString().toDouble() * 60.0
-            val segundos = binding.seg.text.toString().toDouble() + minutos
+            val minutosOne = binding.minOne.text.toString().toDouble() * 60.0
+            val segundosOne = binding.segOne.text.toString().toDouble() + minutosOne
+
+            val minutosTwo = binding.minTwo.text.toString().toDouble() * 60.0
+            val segundosTwo = binding.segOne.text.toString().toDouble() + minutosTwo
+
+            val xadrez = Xadrez(segundosOne, segundosTwo, adicional.toDouble())
 
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("seg", segundos)
-            intent.putExtra("ad", adicional.toDouble())
+
+            intent.putExtra("xadrez", xadrez)
 
             startActivity(intent)
         }

@@ -7,14 +7,16 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import tech.leonam.relogioxadrez.databinding.ActivityMainBinding
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
+    private var adicional: Double = 0.0
     private var jogadorDeBaixo: Thread? = null
     private var jogadorDeCima: Thread? = null
     private lateinit var binding: ActivityMainBinding
-    private var tempoJogadorDeBaixo: Double = 0.0
+    private lateinit var xadrez: Xadrez
     private var tempoJogadorDeCima: Double = 0.0
+    private var tempoJogadorDeBaixo: Double = 0.0
     private var esgotouOTempo = false
-    private var adicional: Double = 0.0
     private var movCima: Int = 0
     private var movBaixo: Int = 0
 
@@ -23,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.hide()
         window.navigationBarColor = Color.BLACK
         binding = ActivityMainBinding.inflate(layoutInflater)
-
+        xadrez = intent.extras?.getParcelable("xadrez")!!
         zerar()
 
         jogadorDeBaixo = Thread {
@@ -200,12 +202,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun zerar(){
-        tempoJogadorDeCima = intent.extras!!.getDouble("seg")
-        tempoJogadorDeBaixo = intent.extras!!.getDouble("seg")
-        adicional = intent.extras!!.getDouble("ad")
+        tempoJogadorDeCima = xadrez.segOne
+        tempoJogadorDeBaixo = xadrez.segTwo
+        adicional = xadrez.adicional
 
-        converterPadraoDeTempoParaView(true, tempoJogadorDeBaixo)
-        converterPadraoDeTempoParaView(false, tempoJogadorDeCima)
+        converterPadraoDeTempoParaView(true, tempoJogadorDeCima)
+        converterPadraoDeTempoParaView(false, tempoJogadorDeBaixo)
 
         movCima = 0
         movBaixo = 0
